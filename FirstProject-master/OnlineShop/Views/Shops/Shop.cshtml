@@ -1,0 +1,30 @@
+﻿@model OnlineShop.ViewsModel.ShopResultViewModel
+@{
+    
+    ViewBag.Title = "Страница с Магазинами";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>@ViewBag.Title</h1>
+
+<div class="row mt-5 mb-2">
+
+    @if (Model.GetShops != null && Model.GetShops.Any())
+    {
+        foreach (var shop in Model.GetShops)
+        {
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h4 class="card-title">@shop.Name</h4>
+                        <p class="card-text">Идентификатор: @shop.Id</p>
+                        <a href="@Url.Action("Sellers", "Shops", new { id = shop.Id })" class="btn btn-warning">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <p>Магазины не найдены.</p>
+    }
+</div>

@@ -1,0 +1,48 @@
+﻿@model OnlineShop.ViewsModel.OrderViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>Создать заказ</h1>
+
+<form asp-action="CreateOrder" method="post">
+    <div class="form-group">
+        <label for="BuyerId">ID покупателя</label>
+        <input type="number" class="form-control" id="BuyerId" name="BuyerId" value="@Model.BuyerId" min="1" required />
+    </div>
+
+    <div class="form-group">
+        <label for="SellerId">ID продавца</label>
+        <input type="number" class="form-control" id="SellerId" name="SellerId" value="@Model.SellerId" min="1" required />
+    </div>
+
+    <div class="form-group">
+        <label>Продукты</label>
+        <div id="product-list">
+            <div class="product-item mb-2">
+                <input type="number" class="form-control mb-2" name="Products[0].ProductId" placeholder="ID продукта" min="1" required />
+                <input type="number" class="form-control mb-2" name="Products[0].Count" placeholder="Количество" min="1" required />
+            </div>
+        </div>
+        <button type="button" class="btn btn-secondary" onclick="addProduct()">Добавить продукт</button>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Создать заказ</button>
+</form>
+
+    <script>
+        let productIndex = 1;
+
+        function addProduct() {
+            const productList = document.getElementById("product-list");
+            const newProductItem = document.createElement("div");
+            newProductItem.classList.add("product-item", "mb-2");
+
+            newProductItem.innerHTML = `
+                        <input type="number" class="form-control mb-2" name="Products[${productIndex}].ProductId" placeholder="ID продукта" min="1" required />
+                        <input type="number" class="form-control mb-2" name="Products[${productIndex}].Count" placeholder="Количество" min="1" required />
+                    `;
+
+            productList.appendChild(newProductItem);
+            productIndex++;
+        }
+    </script>

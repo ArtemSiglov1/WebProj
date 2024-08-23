@@ -1,0 +1,38 @@
+﻿@model OnlineShop.ViewsModel.ShopViewModel
+
+@{
+    ViewBag.Title = "Страница с Магазинами";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<h1>@Model.Shop.Name</h1>
+
+<div class="card mb-3">
+    <div class="card-header">
+        <h2>@Model.Shop.Name</h2>
+    </div>
+    <div class="card-body">
+        <p><strong>Идентификатор:</strong> @Model.Shop.Id</p>
+
+        <h3>Продавцы:</h3>
+        @if (Model.Shop.Sellers?.Any() == true)
+        {
+            <ul class="list-group">
+                @foreach (var seller in Model.Shop.Sellers)
+                {
+                    <li class="list-group-item">
+                        <strong>@seller.Name</strong> - ID: @seller.Id
+                        <p><a href="@Url.Action("CreateOrder", "Shops", new { sellerid = seller.Id})" class="btn btn-info">Сделать Заказ</a></p>
+                    </li>
+                }
+            </ul>
+        }
+        else
+        {
+            <p>Продавцы отсутствуют.</p>
+        }
+    </div>
+</div>
+
+<p><a href="@Url.Action("Shop", "Shops")" class="btn btn-primary">Вернуться к списку магазинов</a></p>

@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="BussinesLogic\**" />
+    <EmbeddedResource Remove="BussinesLogic\**" />
+    <None Remove="BussinesLogic\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FirstProject.Data.Enums\FirstProject.Data.Enums.csproj" />
+  </ItemGroup>
+</Project>

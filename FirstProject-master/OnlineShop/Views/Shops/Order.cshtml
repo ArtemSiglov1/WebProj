@@ -1,0 +1,31 @@
+﻿@model FirstProject.Data.Models.Order
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>Детали заказа</h1>
+<p><strong>Покупатель:</strong> @Model.BuyerId</p>
+<p><strong>Продавец:</strong> @Model.SellerId</p>
+<p><strong>Дата создания:</strong> @Model.DateCreate.ToString("dd MMM yyyy HH:mm:ss")</p>
+
+<h3>Товары в заказе:</h3>
+@if (Model.Items?.Any() == true)
+{
+    <ul class="list-group">
+        @foreach (var item in Model.Items)
+        {
+            <li class="list-group-item">
+                <strong>@item.Product.Name</strong> - Количество: @item.Count - Цена за единицу: @item.Product.Price руб.
+            </li>
+        }
+    </ul>
+
+    <div class="mt-3">
+        <p><strong>Итоговая стоимость:</strong> @Model.Items.Sum(i => (decimal)(i.Product.Price * i.Count)) руб.</p>
+    </div>
+}
+else
+{
+    <p>Продукты отсутствуют.</p>
+}
+
+<p><a href="@Url.Action("Shop", "Shops")" class="btn btn-secondary">Вернуться к списку магазинов</a></p>
