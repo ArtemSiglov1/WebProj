@@ -1,7 +1,7 @@
 ﻿@model OnlineShop.ViewsModel.ShopViewModel
 
 @{
-    ViewBag.Title = "Страница с Магазинами";
+    ViewBag.Title = "Страница с продавцами";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
@@ -24,6 +24,8 @@
                     <li class="list-group-item">
                         <strong>@seller.Name</strong> - ID: @seller.Id
                         <p><a href="@Url.Action("CreateOrder", "Shops", new { sellerid = seller.Id})" class="btn btn-info">Сделать Заказ</a></p>
+                        <p><a href="@Url.Action("OrderTransactionList","Shops",new {sellerId=seller.Id})" class="btn btn-warning">Транзакции заказов</a></p>
+
                     </li>
                 }
             </ul>
@@ -35,4 +37,4 @@
     </div>
 </div>
 
-<p><a href="@Url.Action("Shop", "Shops")" class="btn btn-primary">Вернуться к списку магазинов</a></p>
+<p><a href="@Url.Action("List", "Shops")" class="btn btn-primary">Вернуться к списку магазинов</a></p>

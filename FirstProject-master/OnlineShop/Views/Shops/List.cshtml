@@ -17,7 +17,9 @@
                     <div class="card-body">
                         <h4 class="card-title">@shop.Name</h4>
                         <p class="card-text">Идентификатор: @shop.Id</p>
-                        <a href="@Url.Action("Sellers", "Shops", new { id = shop.Id })" class="btn btn-warning">Подробнее</a>
+                        <p><a href="@Url.Action("Sellers", "Shops", new { id = shop.Id })" class="btn btn-warning">Подробнее</a></p>
+                        <p><a href="@Url.Action("ProductList","Shops",new {id=shop.Id})" class="btn btn-warning">Продукты в магазине</a></p>
+                        <p><a href="@Url.Action("StorageTransactionList","Shops",new {id=shop.Id})" class="btn btn-warning">Транзакции склада</a></p>
                     </div>
                 </div>
             </div>

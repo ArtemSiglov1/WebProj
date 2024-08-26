@@ -55,7 +55,7 @@ namespace OnlineShop
             {
 				endpoints.MapControllerRoute(
 					name: "default",
-					pattern: "{controller=Shops}/{action=Shop}/{id?}");
+					pattern: "{controller=Shops}/{action=List}/{id?}");
 				//endpoints.MapControllerRoute(
     //                name: "default",
     //                pattern: "{controller=Shops}/{action=Result}");

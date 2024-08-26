@@ -56,15 +56,15 @@ namespace FirstProject.Service
             var shops = await db.Shops.ToListAsync();
             return shops;
         }
-        public async Task<Shop> GetShop(int shopId)
+        public async Task<Shop?> GetShop(int shopId)
         {
             await using var db = new DataContext(_dbContextOptions);
-            var shops = await db.Shops.Where(x=>x.Id==shopId).FirstOrDefaultAsync();
+            var shops = await db.Shops.Where(x=>x.Id==shopId).Select(x=>new Shop { Id=shopId,Name=x.Name,
+            Sellers=x.Sellers,Transactions=x.Transactions}).FirstOrDefaultAsync();
             if (shops == null)
             {
                 return null;
             }
-            shops.Sellers =await GetSellers(shopId);
             return shops;
         }
         /// <summary>
@@ -102,6 +102,14 @@ namespace FirstProject.Service
             var sellers = await db.Sellers.Where(x => x.ShopId == shopId).ToListAsync();
             return sellers;
         }
+        public async Task<Seller?> GetSeller(int id)
+        {
+            await using var db = new DataContext(_dbContextOptions);
+            var sellers = await db.Sellers.Where(x => x.Id== id).FirstOrDefaultAsync();
+            if (sellers == null)
+                return null;
+            return sellers;
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -131,9 +139,6 @@ namespace FirstProject.Service
             var product = await db.Products.ToListAsync();
             return product;
         }
-
-
-
         public async Task DeliverGoods(int shopId, int productId, double count)
         {
             await using var db = new DataContext(_dbContextOptions);
@@ -152,7 +157,6 @@ namespace FirstProject.Service
             var transaction = await db.StorageTransactions.Where(x => x.ShopId == shopId).ToListAsync();
             return transaction;
         }
-
         public async Task GetProduct(List<OrderItem> orders, int shopId)
         {
             await using var db=new DataContext(_dbContextOptions);
@@ -187,6 +191,13 @@ namespace FirstProject.Service
             await db.BulkInsertAsync(buyers);
             await db.SaveChangesAsync();
 
+        }
+        public async Task<List<OrderTransaction>> GetOrderTransactions(int sellerId)
+        {
+            await using var db = new DataContext(_dbContextOptions);
+            var orders=await db.Orders.Where(x=>x.SellerId==sellerId).Select(x=>x.Id).ToListAsync();
+            var transactions = db.OrderTransactions.Where(x => orders.Any(y => x.OrderId == y)).ToList();
+            return transactions;
         }
 
         //public async Task AddBuyer(List<Buyer> buyers)

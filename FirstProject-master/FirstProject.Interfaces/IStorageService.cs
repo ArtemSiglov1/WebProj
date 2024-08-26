@@ -18,6 +18,7 @@ namespace FirstProject.Interfaces
         /// <returns>рандомный товар из бд</returns>
         public Task GetProduct(List<OrderItem> orders,int shopId);
         public Task<List<Product>> GetProduct();
+        public Task<Seller?> GetSeller(int id);
 
         /// <summary>
         /// создать магазин
@@ -31,7 +32,9 @@ namespace FirstProject.Interfaces
         /// </summary>
         /// <returns>лист магазинов</returns>
         public Task<List<Shop>> GetShops();
-        public Task<Shop> GetShop(int shopId);
+        public Task<Shop?> GetShop(int shopId);
+        public Task<List<StorageTransaction>> GetStorageTransaction(int shopId);
+        public Task<List<OrderTransaction>> GetOrderTransactions(int sellerId);
 
         /// <summary>
         /// добавление продавца

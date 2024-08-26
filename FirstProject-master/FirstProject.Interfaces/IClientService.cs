@@ -9,8 +9,8 @@ namespace FirstProject.Interfaces
        /// <param name="sellerId">идентиф продавца</param>
        /// <param name="items">покупки</param>
        /// <returns></returns>
-       public  Task<Order> CreateOrders(int buyerId, int sellerId, List<OrderItem> items);
-        public Task<Order> GetOrder(int id);
+       public  Task<Order?> CreateOrders(int buyerId, int sellerId, List<OrderItem> items);
+        public Task<Order?> GetOrder(int id);
 
     }
 }

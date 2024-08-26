@@ -34,7 +34,7 @@ namespace FirstProject.Service
         /// <summary>
         /// лист продуктов
         /// </summary>
-       public List<Product> Products { get; set; }
+       public List<Product>? Products { get; set; }
         /// <summary>
         /// метод для создания заказов
         /// </summary>
@@ -42,7 +42,7 @@ namespace FirstProject.Service
         /// <param name="sellerId">идентиф продавца</param>
         /// <param name="items">список покупок</param>
         /// <returns>заказ</returns>
-        public async Task<Order> CreateOrders(int buyerId,int sellerId,List<OrderItem> items)
+        public async Task<Order?> CreateOrders(int buyerId,int sellerId,List<OrderItem> items)
         {
             await using var db = new DataContext(_dbContextOptions);
             var buyer = await db.Buyers.AnyAsync(x => x.Id == buyerId);
@@ -60,7 +60,7 @@ namespace FirstProject.Service
             await db.SaveChangesAsync();
             return order;
         }
-        public async Task<Order> GetOrder(int id)
+        public async Task<Order?> GetOrder(int id)
         {
             await using var db = new DataContext(_dbContextOptions);
             var order=await db.Orders.Where(x => x.Id == id).Select(x=>new Order { Id=x.Id,

@@ -82,7 +82,6 @@ namespace FirstProject.Service
         {
             
             await using var db = new DataContext(_dbContextOptions);
-            await db.Orders.AddAsync(order);
             await using var transact=await db.Database.BeginTransactionAsync();
             var product = await CheckProduct(order, shopId);
             var productIds = order.Items.Select(x => x.ProductId).ToArray();

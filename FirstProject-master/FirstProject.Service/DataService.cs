@@ -46,22 +46,15 @@ namespace FirstProject.Service
         /// 
         /// </summary>
         /// <returns></returns>
-        public Product Product(int id)
+        public Product? Product(int id)
         {
             using var db = new DataContext(_dbContextOptions);
             Random random = new Random();
-            var product = db.Products.Where(x=>x.Id==id).Select(x=>new Product {Name=x.Name,Price=x.Price }).FirstOrDefault();
+            var product = db.Products.Where(x=>x.Id==id).Select(x=>new Product {Id=x.Id,Name=x.Name,Price=x.Price }).FirstOrDefault();
             if (product == null) return null; 
             return product;
         }
-        public async Task<List<Product>> GetProducts(int id)
-        {
-            await using var db = new DataContext(_dbContextOptions);
-            var products = await db.Products.Where(x=>x.Id==id).ToListAsync(); 
-            return products;
-        }
-        
-        
+       
         /// <summary>
         /// 
         /// </summary>
@@ -142,7 +135,7 @@ namespace FirstProject.Service
             }
         }
 
-        public async Task<List<Shop>> GetShop()
+        public async Task<List<Shop>> GetShops()
         {
             await using var db = new DataContext(_dbContextOptions);
             var shop=await db.Shops.Select(x=>new Shop { Id=x.Id,Name=x.Name,Sellers=x.Sellers}).ToListAsync();

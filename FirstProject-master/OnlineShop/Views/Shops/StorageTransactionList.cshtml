@@ -1,0 +1,37 @@
+﻿@model IEnumerable<OnlineShop.ViewsModel.StorageTransactionViewModel>
+
+@{
+    ViewBag.Title = "Список Транзакций Складов";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<h1>@ViewBag.Title</h1>
+
+    <div class="row mt-5">
+
+    
+        @foreach (var transaction in Model)
+        {
+
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-body">
+                    <h5 class="card-title">Транзакция №@transaction.Id</h5>
+                    <p class="card-text">Идентиф магазина @transaction.ShopId</p>
+                    <p class="card-text">Идентиф продукта @transaction.ProductId</p>
+
+                        <p><strong>Количество:</strong> @transaction.Count</p>
+                    <h5 class="card-title">@transaction.DateCreate</h5>
+                    <p><strong>Тип транзакции:</strong> @transaction.TransactionType</p>
+
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
+
+
+<p><a href="@Url.Action("List", "Shops")" class="btn btn-primary">Вернуться к списку магазинов</a></p>
+

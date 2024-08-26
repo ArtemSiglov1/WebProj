@@ -25,7 +25,7 @@ namespace FirstProject.Interfaces
         /// ищет рандомный продукт
         /// </summary>
         /// <returns>продукт</returns>
-        public Product Product(int id);
+        public Product? Product(int id);
         // public Task<Magazin> AddShop();
         /// <summary>
         /// метод для инициализации бд 
@@ -38,7 +38,7 @@ namespace FirstProject.Interfaces
         /// </summary>
         /// <returns></returns>
         public  Task DelleteAll();
-        public Task<List<Shop>> GetShop();
+        public Task<List<Shop>> GetShops();
         public Task<decimal> SoldOnOrders();
         public Task<decimal> ProductShipped();
         public Task<List<StatisticMagazin>> GetStatisticMagazins();

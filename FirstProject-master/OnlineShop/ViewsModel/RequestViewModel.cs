@@ -10,6 +10,6 @@ namespace OnlineShop.ViewsModel
         /// идентиф продавца
         /// </summary>
         public int SellerId { get; set; }
-        public List<ProductsViewModel> Products { get; set; } = null;
+        public List<ProductsViewModel>? Products { get; set; } = null;
     }
 }

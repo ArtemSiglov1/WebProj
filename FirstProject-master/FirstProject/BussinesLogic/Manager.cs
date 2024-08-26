@@ -102,7 +102,7 @@ namespace FirstProject.Service
         public async Task InitMagazin()
         {
             Magazins = new List<Magazin>();
-            var shops = await DataService.GetShop();
+            var shops = await DataService.GetShops();
             Magazins.AddRange(shops.Select(x => new Magazin(DataService, x.Id, SellerService)
             {
                 Sellers = x.Sellers.Select(seller => new BusinessSeller() { Id = seller.Id, ShopId = x.Id }).ToList()
